@@ -675,6 +675,10 @@ a{text-decoration:none;color:inherit}
 /* CTAs hover */
 .btn { transition: all 0.2s ease !important; }
 .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(175,140,83,.35); }
+/* Destaque sutil dos CTAs da prévia gratuita (não altera cor, tamanho ou posição) */
+.cta-pulse { outline: 1px solid rgba(175,140,83,0); outline-offset: 4px; animation: ctaPulse 3.6s ease-in-out infinite; }
+@keyframes ctaPulse { 0%,100% { outline-color: rgba(175,140,83,0); } 50% { outline-color: rgba(175,140,83,.45); } }
+@media (prefers-reduced-motion: reduce) { .cta-pulse { animation: none; } }
 .btn-primary:hover { transform: translateY(-1px); }
 .btn-outline-wh:hover { transform: translateY(-1px); }
 
@@ -898,8 +902,8 @@ a{text-decoration:none;color:inherit}
       </h1>
       <p class="hero-sub">O problema que você acha que é raramente é o problema real. O DNA Map mapeia o que o time não fala, o que os números não mostram e o que o dono não vê porque está dentro do caos. Vai à raiz — e entrega em dados onde o lucro vaza, quais riscos estão ocultos e o que precisa mudar antes que o crescimento quebre a estrutura.</p>
       <div class="hero-actions">
-        <a href="#planos" class="btn btn-gold btn-lg">Quero meu plano de ação</a>
-        <a href="#produto" class="btn btn-outline-wh">Ver a metodologia →</a>
+        <a href="#planos" class="btn btn-gold btn-lg">CONHEÇA O PLANO IDEAL PARA SUA EMPRESA</a>
+        <a href="https://dnamap.onrender.com/demo" class="btn btn-outline-wh cta-pulse">DESCUBRA O QUE TRAVA SUA EMPRESA: FAÇA TESTE GRATUITO</a>
       </div>
       <p class="hero-note">Entregue em até 30 dias · Plano de ação priorizado</p>
     </div>
@@ -1052,7 +1056,7 @@ a{text-decoration:none;color:inherit}
         <div class="eyebrow eyebrow-gold" style="margin-bottom:14px">Contexto ideal</div>
         <h2 class="sec-h2">O DNA Map foi feito para quem cresce rápido e sente que a estrutura não aguenta</h2>
         <p class="sec-sub" style="margin-top:12px">Quanto maior a velocidade de crescimento, maior o risco invisível. O DNA Map foi criado para antecipar possíveis crises.</p>
-        <a href="#planos" class="btn btn-gold" style="margin-top:32px">Quero meu plano de ação</a>
+        <a href="https://dnamap.onrender.com/demo" class="btn btn-gold cta-pulse" style="margin-top:32px">Quero meu plano de ação</a>
       </div>
       <div class="quando-grid reveal delay-2">
         <div class="quando-item">
@@ -1289,7 +1293,7 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="custo-close">
       <p class="custo-close-text">Esses casos não são exceção. São o padrão de empresas que crescem sem entender sua própria Cultura e estrutura.</p>
-      <a href="#planos" class="btn btn-gold btn-lg">Quero fazer o diagnóstico agora</a>
+      <a href="https://dnamap.onrender.com/demo" class="btn btn-gold btn-lg cta-pulse">QUERO DESCOBRIR OS RISCOS AGORA</a>
     </div>
   </div>
 </section>
@@ -1431,7 +1435,7 @@ a{text-decoration:none;color:inherit}
 
     <!-- CTA Demo -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px" class="reveal">
-      <a href="https://dnamap.onrender.com/demo" target="_blank" rel="noopener"
+      <a href="https://dnamap.onrender.com/demo" target="_blank" rel="noopener" class="cta-pulse"
          style="display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:var(--dk);color:var(--gd);border-radius:2px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;font-family:inherit;text-decoration:none;transition:background .2s,transform .15s"
          onmouseover="this.style.background='#424F2C';this.style.transform='translateY(-1px)'"
          onmouseout="this.style.background='var(--dk)';this.style.transform='translateY(0)'">
