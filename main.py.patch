@@ -1,0 +1,557 @@
+--- /home/claude/BACKUP_ORIGINAL_20261105_163006/main.py.orig	2026-11-05 16:30:06.175320173 -0300
++++ /home/claude/dnamap-software/app/main.py	2026-11-05 16:54:01.234253112 -0300
+@@ -10,7 +10,7 @@
+ # Logo oficial
+ LOGO = "data:image/png;base64,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"
+ 
+-DB = {'users':{},'empresas':{},'diagnosticos':{},'respostas':{},'vendas':[]}
++DB = {'users':{},'empresas':{},'diagnosticos':{},'respostas':{},'vendas':[],'leads':{}}
+ def _hash(p): return hashlib.sha256(p.encode()).hexdigest()
+ 
+ # ─── PERSISTÊNCIA SQLITE ───
+@@ -336,6 +336,7 @@
+ T_ADMIN = """<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin</title>""" + CSS + """</head><body>
+ <nav class="nav"><img src="{{ logo }}" style="max-height:36px;max-width:200px;width:auto;height:auto;object-fit:contain"><div class="nav-links">
+   <a href="/admin" class="nav-link" style="color:var(--vd);font-weight:600">Dashboard</a>
++  <a href="/admin/leads" class="nav-link">Leads Demo</a>
+   <a href="/simular-compra" class="btn btn-gold btn-sm">Simular Compra</a>
+   <a href="/admin/empresa/nova" class="btn btn-outline btn-sm">+ Empresa</a>
+   <a href="/admin/usuario/novo" class="btn btn-outline btn-sm">+ Usuário</a>
+@@ -1265,3 +1266,537 @@
+ 
+ if __name__ == '__main__':
+     app.run(debug=True, host='0.0.0.0', port=5000)
++
++
++# ═══ EXPERIÊNCIA DEMONSTRATIVA DNA MAP (anexado) ═══
++# ═══════════════════════════════════════════════════════════════════════
++# EXPERIÊNCIA DEMONSTRATIVA DNA MAP — "Prévia de Maturidade Organizacional"
++# YOU Exponencial · Camada de apresentação da prévia pública.
++#
++# PRINCÍPIOS (não alterar sem autorização):
++#  - O cálculo é 100% do motor oficial app.engine.calcular(). Nada é
++#    recalculado aqui. Pesos, estágios, dispersão e fórmulas ficam no backend.
++#  - Esta prévia NÃO expõe pesos, fórmulas, campos internos nem detalhes.
++#  - Leads são gravados no bucket 'leads' do MESMO dnamap.db (via db.save),
++#    isolados de users/empresas/diagnosticos/respostas. Nenhuma rota existente
++#    é alterada. Sem login, sem pagamento.
++#
++# Este bloco é anexado ao final de app/main.py e usa os objetos já definidos
++# lá: app, DB, CSS, LOGO, calcular, persist, render_template_string, request,
++# redirect, url_for, abort, datetime, uuid, session, admin_required,
++# login_required.
++# ═══════════════════════════════════════════════════════════════════════
++
++# ── CONFIG EDITÁVEL: texto de exibição das 7 perguntas da prévia ──
++# 'campo' = ID oficial do motor (None = transversal, NÃO entra no cálculo).
++# As OPÇÕES 1–5 abaixo são verbatim do Documento Oficial de Perguntas e
++# Respostas (fonte da metodologia). Para ajustar a REDAÇÃO de exibição,
++# edite somente este bloco — a lógica de cálculo não muda.
++DEMO_PERGUNTAS = [
++    {
++        'campo': 'e_p1', 'pilar': 'estrategia',
++        'titulo': 'Visão de Futuro & Planejamento',
++        'stem': 'Como a empresa define e persegue seus objetivos de longo prazo?',
++        'opcoes': [
++            'Inexistente (Apagando Incêndio): Não temos planejamento. O foco é 100% operacional e em resolver problemas do dia.',
++            'Intuitivo (Na cabeça do dono): Os sócios sabem onde querem chegar, mas não está documentado e a liderança não tem clareza.',
++            'Básico (Gaveta): Temos um planejamento feito (PPT/PDF), mas ele é pouco visitado e não dita o ritmo da semana.',
++            'Estruturado (Em Execução): Temos metas anuais claras compartilhadas com a liderança e acompanhadas mensalmente.',
++            'Exponencial (OKRs e Cultura): O plano de 3/5 anos é desdobrado em metas trimestrais (OKRs). Todos sabem como seu trabalho impacta o futuro.',
++        ],
++    },
++    {
++        'campo': 'f_p4', 'pilar': 'financas',
++        'titulo': 'Visibilidade de Margem (CMV/EBITDA)',
++        'stem': 'Você sabe exatamente onde ganha e onde perde dinheiro?',
++        'opcoes': [
++            'Cega: Olhamos apenas o Faturamento Bruto. Não sei qual produto dá prejuízo.',
++            'Média: Sei a margem geral da empresa, mas não por produto/SKU ou canal de venda.',
++            'Apurada: Tenho noção do Custo de Mercadoria Vendida (CMV), mas os custos fixos são rateados de forma genérica.',
++            'Detalhada: Sei a Margem de Contribuição exata de cada linha de negócio. Cortamos produtos que não dão margem.',
++            'Foco em EBITDA: A meta da empresa é Resultado Operacional (EBITDA), não apenas Venda. O time é bonificado pela margem, não só pelo volume.',
++        ],
++    },
++    {
++        'campo': 'p_p10', 'pilar': 'pessoas',
++        'titulo': 'Maturidade da Liderança',
++        'stem': 'De modo geral, como você descreve a atuação da liderança direta?',
++        'opcoes': [
++            'Ausente ou Tóxico: Não há apoio, apenas cobrança. Às vezes falta respeito ou educação.',
++            'Inconstante: O feedback é raro ou acontece apenas quando algo dá errado.',
++            'Operacional: Fala-se muito sobre trabalho/tarefa, mas quase nunca sobre desenvolvimento ou carreira.',
++            'Próximo: Há conversas regulares (1:1), feedback construtivo e respeito.',
++            'Mentor: A liderança investe no crescimento das pessoas, desafia positivamente e impulsiona performance.',
++        ],
++    },
++    {
++        'campo': 'm_p5', 'pilar': 'marketing',
++        'titulo': 'Previsibilidade da Receita (Processo Comercial)',
++        'stem': 'Quão previsível e estruturada é a geração de receita?',
++        'opcoes': [
++            'Caderninho: Controle manual ou na cabeça do vendedor.',
++            'Planilha: Controle básico, mas sem histórico de relacionamento.',
++            'CRM Básico: Usamos CRM, mas mais como agenda de contatos do que gestão de funil.',
++            'Processual: Etapas do funil claras, scripts definidos e gestão de pipeline semanal.',
++            'Científico: Taxas de conversão por etapa monitoradas, playbook de vendas vivo e treinamento contínuo (Sales Enablement).',
++        ],
++    },
++    {
++        'campo': 'g_p1', 'pilar': 'gestao',
++        'titulo': 'Rituais de Gestão',
++        'stem': 'Como a gestão da rotina e o acompanhamento de metas acontecem?',
++        'opcoes': [
++            'Corredor/WhatsApp: Resolvemos as coisas conforme elas aparecem, sem hora marcada. Muita interrupção.',
++            'Apagar Incêndio: Só nos reunimos formalmente quando existe um problema grave para resolver.',
++            'Reunião de Status: Reuniões longas e cansativas apenas para dar repasse, sem decisão prática.',
++            'Rotina Organizada: Temos reuniões semanais/mensais com pauta definida e saímos com plano de ação.',
++            'Gestão Ágil: Rituais curtos e focados em dados (Daily/Weekly), com visualização clara de metas (Dashboards) e responsáveis.',
++        ],
++    },
++    {
++        'campo': 'o_p4', 'pilar': 'operacao',
++        'titulo': 'Processos Críticos',
++        'stem': 'A empresa possui seus processos críticos documentados e acessíveis às equipes?',
++        'opcoes': [
++            'Inexistente: Não existem processos documentados.',
++            'Inicial: Alguns processos estão documentados informalmente.',
++            'Parcialmente Estruturado: Os principais processos estão registrados, mas nem sempre atualizados.',
++            'Estruturado: Os processos estão documentados, atualizados e disponíveis para consulta.',
++            'Avançado: Os processos são documentados, auditados e continuamente melhorados.',
++        ],
++    },
++    {
++        # Q7 — TRANSVERSAL. NÃO entra na matriz (campo=None). Reflexiva.
++        # ATENÇÃO: redação a confirmar com o verbatim aprovado (ver relatório).
++        'campo': None, 'pilar': None,
++        'titulo': 'Dependência do Dono',
++        'stem': 'Se o(a) fundador(a)/sócio(a) se ausentar por 30 dias, o que acontece com a operação?',
++        'opcoes': [
++            'A empresa para: decisões, vendas e operação dependem diretamente dele(a).',
++            'Trava em pontos críticos: o dia a dia segue, mas decisões importantes esperam o retorno.',
++            'Funciona com atritos: a operação continua, com perda de ritmo e algumas decisões represadas.',
++            'Opera bem: a liderança assume e a operação mantém o ritmo com autonomia.',
++            'Independente: a empresa opera e evolui sem a presença do fundador no dia a dia.',
++        ],
++    },
++]
++
++# Mapa campo-oficial -> índice da pergunta (apenas as que pontuam)
++DEMO_CAMPOS_NOTA = {p['campo']: i for i, p in enumerate(DEMO_PERGUNTAS) if p['campo']}
++
++
++def _demo_devolutiva(res, q7_nivel):
++    """Gera texto de devolutiva a partir do resultado oficial.
++    Não inventa números: usa apenas o que o motor retornou."""
++    pilares = {k: v for k, v in res['pilares'].items() if v is not None}
++    nomes = res['nomes_pilares']
++    linhas = []
++    if pilares:
++        forte = max(pilares, key=pilares.get)
++        fraco = min(pilares, key=pilares.get)
++        linhas.append(f"Seu ponto mais forte nesta prévia é <b>{nomes.get(forte, forte)}</b> "
++                      f"(nota {pilares[forte]:.1f}).")
++        if fraco != forte:
++            linhas.append(f"A maior oportunidade de evolução está em <b>{nomes.get(fraco, fraco)}</b> "
++                          f"(nota {pilares[fraco]:.1f}).")
++    disp = res.get('dispersao_nivel')
++    if disp == 'Saudável':
++        linhas.append("A maturidade está <b>equilibrada</b> entre os pilares avaliados — crescimento sustentável.")
++    elif disp == 'Alerta':
++        linhas.append("Há <b>desequilíbrio em alerta</b> entre os pilares: alguns avançam enquanto outros ficam para trás.")
++    elif disp == 'Crítico':
++        linhas.append("Há <b>desequilíbrio crítico</b> entre os pilares — risco de gargalo que trava o crescimento.")
++    # Q7 — leitura qualitativa, separada do cálculo
++    if q7_nivel:
++        if q7_nivel <= 2:
++            linhas.append("Sobre <b>dependência do dono</b>: a empresa ainda depende fortemente da presença do fundador — "
++                          "um dos principais limitadores de valor e escala.")
++        elif q7_nivel == 3:
++            linhas.append("Sobre <b>dependência do dono</b>: a operação resiste a ausências curtas, mas decisões-chave "
++                          "ainda se concentram no fundador.")
++        else:
++            linhas.append("Sobre <b>dependência do dono</b>: a empresa demonstra autonomia operacional — base sólida "
++                          "para escala e sucessão.")
++    return linhas
++
++
++@app.route('/demo')
++def demo_experiencia():
++    """Página pública da Prévia de Maturidade Organizacional DNA Map."""
++    return render_template_string(T_DEMO, logo=LOGO, perguntas=DEMO_PERGUNTAS)
++
++
++@app.route('/demo/processar', methods=['POST'])
++def demo_processar():
++    """Recebe lead + respostas, calcula com o motor oficial, grava o lead
++    no bucket 'leads' e devolve a devolutiva. Uma única transação garante
++    que o lead fique sempre ligado às respostas e ao resultado."""
++    f = request.form
++
++    # 1) Consentimento LGPD obrigatório para processar
++    if f.get('aceite_lgpd') not in ('on', 'true', '1', 'sim'):
++        return render_template_string(
++            T_DEMO, logo=LOGO, perguntas=DEMO_PERGUNTAS,
++            erro='É necessário concordar com o tratamento dos dados para ver o resultado.')
++
++    # 2) Dados do lead (5 campos)
++    lead_nome = (f.get('nome') or '').strip()
++    lead_email = (f.get('email') or '').strip()
++    lead_tel = (f.get('telefone') or '').strip()
++    lead_colab = (f.get('num_colaboradores') or '').strip()
++    lead_cargo = (f.get('cargo') or '').strip()
++    if not (lead_nome and lead_email):
++        return render_template_string(
++            T_DEMO, logo=LOGO, perguntas=DEMO_PERGUNTAS,
++            erro='Informe ao menos nome e e-mail para continuar.')
++
++    # 3) Respostas -> dict no formato do motor oficial (só campos que pontuam)
++    respostas_motor = {}
++    respostas_demo = {}   # registro completo (inclui Q7 transversal)
++    q7_nivel = None
++    for i, p in enumerate(DEMO_PERGUNTAS):
++        val = f.get(f'q{i}')
++        try:
++            val_int = int(val)
++        except (TypeError, ValueError):
++            val_int = None
++        respostas_demo[f'q{i}'] = {'titulo': p['titulo'], 'valor': val_int}
++        if p['campo'] and val_int and 1 <= val_int <= 5:
++            respostas_motor[p['campo']] = val_int
++        if p['campo'] is None and val_int:
++            q7_nivel = val_int
++
++    # 4) CÁLCULO OFICIAL — motor intacto
++    resultado = calcular(respostas_motor)
++
++    # 5) View filtrada para o lead/devolutiva (sem pesos/detalhes/campos internos)
++    res_publico = {
++        'nota_geral': resultado['nota_geral'],
++        'estagio': resultado['estagio'],
++        'dispersao': resultado['dispersao'],
++        'dispersao_nivel': resultado['dispersao_nivel'],
++        'pilares': {k: v for k, v in resultado['pilares'].items()},
++        'nomes_pilares': resultado['nomes_pilares'],
++    }
++
++    # 6) Gravar o lead no bucket 'leads' (mesmo dnamap.db), ligado às respostas e ao resultado
++    lead_id = 'lead_' + str(uuid.uuid4())[:8]
++    DB.setdefault('leads', {})[lead_id] = {
++        'id': lead_id,
++        'nome': lead_nome,
++        'email': lead_email,
++        'telefone': lead_tel,
++        'num_colaboradores': lead_colab,
++        'cargo': lead_cargo,
++        'aceite_lgpd': True,
++        'aceite_comercial': f.get('aceite_comercial') in ('on', 'true', '1', 'sim'),
++        'origem': 'Experiência Demonstrativa DNA Map',
++        'criado_em': datetime.now().isoformat(),
++        'respostas_demo': respostas_demo,
++        'resultado_demo': res_publico,
++        'q7_dependencia_dono': q7_nivel,
++    }
++    try:
++        persist()
++    except Exception as e:
++        app.logger.error(f'demo lead persist error: {e}')
++
++    devolutiva = _demo_devolutiva(resultado, q7_nivel)
++    return render_template_string(
++        T_DEMO_RESULTADO, logo=LOGO, res=res_publico, nome=lead_nome,
++        devolutiva=devolutiva, q7_nivel=q7_nivel, perguntas=DEMO_PERGUNTAS)
++
++
++@app.route('/admin/leads')
++@login_required
++@admin_required
++def admin_leads():
++    leads = sorted(DB.get('leads', {}).values(),
++                   key=lambda x: x.get('criado_em', ''), reverse=True)
++    return render_template_string(T_ADMIN_LEADS, leads=leads, logo=LOGO)
++
++
++@app.route('/admin/leads/<lead_id>')
++@login_required
++@admin_required
++def admin_lead_detalhe(lead_id):
++    lead = DB.get('leads', {}).get(lead_id)
++    if not lead:
++        abort(404)
++    return render_template_string(T_ADMIN_LEAD_DET, lead=lead, logo=LOGO,
++                                  perguntas=DEMO_PERGUNTAS)
++
++
++# ═══ TEMPLATES DA PRÉVIA ═══
++T_DEMO = """<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
++<meta name="viewport" content="width=device-width,initial-scale=1">
++<title>Prévia de Maturidade Organizacional · DNA Map</title>""" + CSS + """
++<style>
++.demo-hero{background:var(--vd);color:var(--of);padding:40px 0 34px}
++.demo-hero .wrap{max-width:720px}
++.demo-step{display:none}.demo-step.active{display:block}
++.q-opcao{display:block;border:1px solid rgba(184,149,90,.25);border-radius:5px;padding:12px 14px;margin-bottom:8px;cursor:pointer;background:#fff;transition:.15s}
++.q-opcao:hover{border-color:var(--dt)}
++.q-opcao input{margin-right:8px}
++.q-opcao.sel{background:var(--vd);color:var(--of);border-color:var(--vd)}
++.q-num{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--dt);color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;margin-right:8px}
++.progress{height:4px;background:var(--mv);border-radius:2px;overflow:hidden;margin:18px 0}
++.progress-bar{height:100%;background:var(--dt);width:0;transition:.3s}
++.chk{display:flex;align-items:flex-start;gap:9px;margin:10px 0;font-size:12px;color:var(--cz);text-transform:none;letter-spacing:0;line-height:1.5}
++.chk input{width:auto;margin-top:2px;flex-shrink:0}
++.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
++@media(max-width:600px){.lead-grid{grid-template-columns:1fr}}
++.btn-lg{width:100%;justify-content:center;padding:13px;font-size:11px}
++</style></head><body>
++<nav class="nav"><img src="{{ logo }}" style="max-height:34px;max-width:180px;width:auto;height:auto;object-fit:contain">
++<div class="nav-links"><span class="nav-link">Prévia de Maturidade</span></div></nav>
++
++<div class="demo-hero"><div class="wrap">
++  <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ch);margin-bottom:8px">DNA Map · YOU Exponencial · Experiência demonstrativa gratuita</div>
++  <h1 style="font-size:28px;font-weight:300;line-height:1.25">Sua primeira leitura de maturidade começa aqui.</h1>
++  <p style="font-size:14px;opacity:.9;margin-top:12px;max-width:600px">Esta experiência gratuita apresenta uma pequena amostra do DNA Map. Você responderá a 7 perguntas e receberá uma leitura inicial baseada nas suas respostas.</p>
++  <p style="font-size:13px;opacity:.78;margin-top:10px;max-width:600px">No diagnóstico completo, a avaliação é muito mais profunda: reúne diferentes perspectivas da organização, amplia a investigação sobre os seis pilares e permite compreender a realidade da empresa de forma integrada. O objetivo desta demonstração é que você conheça um pouco da metodologia e perceba o potencial de uma análise muito mais abrangente.</p>
++</div></div>
++
++<div style="padding:28px 0 48px"><div class="wrap" style="max-width:720px">
++  {% if erro %}<div class="flash flash-error">{{ erro }}</div>{% endif %}
++  <form method="POST" action="/demo/processar" id="demoForm" autocomplete="on">
++    <div class="progress"><div class="progress-bar" id="pbar"></div></div>
++
++    <!-- ETAPA 1: LEAD -->
++    <div class="demo-step active" id="step-lead">
++      <div class="card">
++        <div class="card-header">Antes de começar</div>
++        <p style="font-size:13px;color:var(--cz);margin-bottom:16px">Precisamos de alguns dados para preparar e enviar o seu resultado.</p>
++        <div class="lead-grid">
++          <div class="form-group"><label>Nome completo *</label><input type="text" name="nome" autocomplete="name" required></div>
++          <div class="form-group"><label>E-mail corporativo *</label><input type="email" name="email" autocomplete="email" required></div>
++          <div class="form-group"><label>Telefone / WhatsApp</label><input type="tel" name="telefone" autocomplete="tel"></div>
++          <div class="form-group"><label>Nº de colaboradores</label>
++            <select name="num_colaboradores" autocomplete="off">
++              <option value="">Selecione</option>
++              <option>1–10</option><option>11–30</option><option>31–100</option>
++              <option>101–300</option><option>301–1000</option><option>1000+</option>
++            </select></div>
++        </div>
++        <div class="form-group"><label>Seu cargo</label><input type="text" name="cargo" autocomplete="organization-title" placeholder="Ex.: CEO, Sócio(a), Diretor(a)"></div>
++
++        <label class="chk"><input type="checkbox" name="aceite_lgpd" required>
++          Concordo que meus dados sejam tratados pela YOU Exponencial para a geração e envio deste resultado, nos termos da LGPD. *</label>
++        <label class="chk"><input type="checkbox" name="aceite_comercial">
++          Aceito receber comunicações comerciais da YOU Exponencial sobre o DNA Map e conteúdos relacionados. (opcional)</label>
++
++        <button type="button" class="btn btn-verde btn-lg" style="margin-top:10px" onclick="goQuestions()">Começar a prévia →</button>
++      </div>
++    </div>
++
++    <!-- ETAPAS 2..: PERGUNTAS -->
++    {% for p in perguntas %}
++    {% set qidx = loop.index0 %}
++    <div class="demo-step" id="step-{{ qidx }}" data-q="{{ qidx }}">
++      <div class="card">
++        <div class="card-header">Pergunta {{ loop.index }} de {{ perguntas|length }}{% if p.campo is none %} · Reflexão{% endif %}</div>
++        <h3 style="font-size:17px;font-weight:500;color:var(--vd);margin-bottom:4px">{{ p.titulo }}</h3>
++        <p style="font-size:13px;color:var(--cz);margin-bottom:14px">{{ p.stem }}</p>
++        {% for op in p.opcoes %}
++        <label class="q-opcao" onclick="selOp(this)">
++          <input type="radio" name="q{{ qidx }}" value="{{ loop.index }}" style="display:none">
++          <span class="q-num">{{ loop.index }}</span>{{ op }}
++        </label>
++        {% endfor %}
++        <div style="display:flex;justify-content:space-between;margin-top:14px;gap:10px">
++          <button type="button" class="btn btn-outline" onclick="prevStep()">← Voltar</button>
++          <button type="button" class="btn btn-verde" onclick="nextStep()" id="next-{{ loop.index0 }}">Próxima →</button>
++        </div>
++      </div>
++    </div>
++    {% endfor %}
++
++    <!-- Botão final (injetado no último passo via JS) -->
++    <input type="hidden" id="lastIdx" value="{{ perguntas|length - 1 }}">
++  </form>
++</div></div>
++
++<div class="footer"><div style="font-size:10px;color:var(--cz);letter-spacing:.06em">DNA MAP · YOU EXPONENCIAL</div></div>
++
++<script>
++var steps = ['lead'];
++document.querySelectorAll('.demo-step[data-q]').forEach(function(s){ steps.push(s.getAttribute('data-q')); });
++var cur = 0;
++var lastIdx = parseInt(document.getElementById('lastIdx').value);
++function show(i){
++  document.querySelectorAll('.demo-step').forEach(function(s){ s.classList.remove('active'); });
++  var id = (steps[i]==='lead') ? 'step-lead' : 'step-'+steps[i];
++  document.getElementById(id).classList.add('active');
++  document.getElementById('pbar').style.width = (i/(steps.length-1)*100)+'%';
++  window.scrollTo(0,0);
++  // Último passo: trocar "Próxima" por "Ver meu resultado"
++  if(steps[i]!=='lead' && parseInt(steps[i])===lastIdx){
++    var b=document.getElementById('next-'+lastIdx);
++    b.textContent='Ver meu resultado →'; b.classList.remove('btn-verde'); b.classList.add('btn-gold');
++    b.onclick=submitForm;
++  }
++}
++function goQuestions(){
++  var form=document.getElementById('demoForm');
++  // valida campos de lead nativamente
++  var reqs=document.querySelectorAll('#step-lead input[required],#step-lead select[required]');
++  for(var i=0;i<reqs.length;i++){ if(!reqs[i].checkValidity()){ reqs[i].reportValidity(); return; } }
++  cur=1; show(cur);
++}
++function selOp(el){
++  var step=el.closest('.demo-step');
++  step.querySelectorAll('.q-opcao').forEach(function(o){ o.classList.remove('sel'); });
++  el.classList.add('sel');
++  el.querySelector('input').checked=true;
++}
++function nextStep(){
++  var step=document.querySelector('.demo-step.active');
++  var r=step.querySelector('input[type=radio]:checked');
++  if(!r){ alert('Selecione uma opção para continuar.'); return; }
++  if(cur<steps.length-1){ cur++; show(cur); }
++}
++function prevStep(){ if(cur>0){ cur--; show(cur); } }
++function submitForm(){
++  var step=document.querySelector('.demo-step.active');
++  var r=step.querySelector('input[type=radio]:checked');
++  if(!r){ alert('Selecione uma opção para continuar.'); return; }
++  document.getElementById('demoForm').submit();
++}
++show(0);
++</script>
++</body></html>"""
++
++
++T_DEMO_RESULTADO = """<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
++<meta name="viewport" content="width=device-width,initial-scale=1">
++<title>Seu resultado · Prévia DNA Map</title>""" + CSS + """
++<style>.res-hero{background:var(--vd);color:var(--of);padding:36px 0}
++.pilar-card.na{opacity:.55}
++.cta-box{background:var(--mv);border:1px solid rgba(184,149,90,.25);border-radius:6px;padding:24px;text-align:center;margin-top:28px}
++.locked-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
++@media(max-width:600px){.locked-grid{grid-template-columns:1fr}}
++.lock-item{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border:0.5px solid rgba(184,149,90,.25);border-radius:4px;background:#faf8f5;font-size:12.5px;color:var(--cz)}
++.lock-item svg{flex-shrink:0;margin-top:1px;color:var(--dt)}
++.locked-head{display:flex;align-items:center;gap:8px}</style>
++</head><body>
++<nav class="nav"><img src="{{ logo }}" style="max-height:34px;max-width:180px;width:auto;height:auto;object-fit:contain">
++<div class="nav-links"><span class="nav-link">Resultado da Prévia</span></div></nav>
++
++<div class="res-hero"><div class="wrap" style="max-width:720px;text-align:center">
++  <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ch);margin-bottom:10px">Prévia de Maturidade Organizacional</div>
++  {% if nome %}<p style="font-size:13px;opacity:.85;margin-bottom:12px">{{ nome.split(' ')[0] }}, este é o retrato da sua empresa nesta prévia:</p>{% endif %}
++  <div class="nota-big" style="color:var(--of)">{{ res.nota_geral }}</div>
++  <div class="estagio-tag" style="background:var(--dt);color:#fff;font-size:12px">Estágio: {{ res.estagio }}</div>
++</div></div>
++
++<div style="padding:28px 0 20px"><div class="wrap" style="max-width:720px">
++  <div class="pilares-grid">
++    {% for key, nome_p in res.nomes_pilares.items() %}
++    <div class="pilar-card {% if res.pilares.get(key) is none %}na{% endif %}">
++      <div class="p-nota">{% if res.pilares.get(key) is not none %}{{ '%.1f'|format(res.pilares[key]) }}{% else %}—{% endif %}</div>
++      <div class="p-nome">{{ nome_p }}</div>
++    </div>
++    {% endfor %}
++  </div>
++
++  <div class="card" style="margin-top:8px">
++    <div class="card-header">Leitura da sua prévia</div>
++    {% set explic = {
++      'Entender':'Sua empresa aparece no estágio inicial de maturidade: as estruturas de gestão ainda são incipientes e a prioridade é organizar os primeiros fundamentos.',
++      'Estruturar':'Sua empresa aparece estruturando seus fundamentos: já existem iniciativas em curso, mas ainda falta consistência e padronização.',
++      'Desenvolver':'Sua empresa aparece com base consolidada e em desenvolvimento: o foco agora é consistência e integração entre as áreas.',
++      'Consolidar':'Sua empresa aparece com maturidade avançada: o momento é de refinar processos e preparar escala.',
++      'Expandir':'Sua empresa aparece em alto nível de maturidade: a prioridade passa a ser inovação e expansão sustentável.'
++    } %}
++    <p style="font-size:14px;margin-bottom:12px">Com base nas suas 7 respostas, sua empresa está no estágio <b>{{ res.estagio }}</b> (nota {{ res.nota_geral }}). {{ explic.get(res.estagio,'') }}</p>
++    {% for linha in devolutiva %}<p style="font-size:14px;margin-bottom:10px">{{ linha|safe }}</p>{% endfor %}
++    <p style="font-size:12px;color:var(--cz);margin-top:12px;border-top:0.5px solid rgba(184,149,90,.15);padding-top:12px">
++      <b>Importante:</b> esta leitura considera <b>apenas as 7 respostas</b> desta experiência demonstrativa. Ela não representa a avaliação da empresa como um todo, nem substitui a escuta organizacional e a análise completa do DNA Map.</p>
++  </div>
++
++  <!-- Conteúdo completo bloqueado -->
++  <div class="card" style="margin-top:16px">
++    <div class="locked-head" style="margin-bottom:10px">
++      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dt)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
++      <div style="font-size:12px;letter-spacing:.06em;color:var(--vd);font-weight:600;text-transform:uppercase">Esta é apenas uma amostra do que o DNA Map pode revelar</div>
++    </div>
++    <p style="font-size:13px;color:var(--cz);margin-bottom:14px">O diagnóstico completo amplia a escuta para diferentes perspectivas da empresa e aprofunda a análise em muito mais questões. É essa visão integrada que permite compreender o que acontece em toda a organização, identificar os pontos que limitam seu potencial e direcionar decisões com maior precisão.</p>
++    <div class="locked-grid">
++      <div class="lock-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Avaliação aprofundada dos seis pilares</div>
++      <div class="lock-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Escuta das diferentes perspectivas da organização</div>
++      <div class="lock-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Dashboards e indicadores estratégicos</div>
++      <div class="lock-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Identificação de gaps críticos, riscos e oportunidades</div>
++      <div class="lock-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Análise integrada da maturidade organizacional</div>
++      <div class="lock-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Plano de ação e prioridades para os próximos 90 dias</div>
++      <div class="lock-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Relatório executivo completo e exportável</div>
++    </div>
++    <p style="font-size:12px;color:var(--cz);margin-top:14px">A aplicação completa é realizada após a contratação, com condução da equipe DNA Map.</p>
++  </div>
++
++  <div class="cta-box">
++    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dt);margin-bottom:8px">Próximo passo</div>
++    <h3 style="font-size:20px;font-weight:300;color:var(--vd);margin-bottom:8px">Faça o diagnóstico completo DNA Map</h3>
++    <p style="font-size:13px;color:var(--cz);margin-bottom:16px">Receba o retrato real e profundo da maturidade da sua organização.</p>
++    <a href="https://www.dnamap.com.br/#planos" class="btn btn-verde" style="padding:12px 28px">Conhecer os planos</a>
++  </div>
++</div></div>
++
++<div class="footer"><div style="font-size:10px;color:var(--cz);letter-spacing:.06em">DNA MAP · YOU EXPONENCIAL</div></div>
++</body></html>"""
++
++
++T_ADMIN_LEADS = """<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
++<meta name="viewport" content="width=device-width,initial-scale=1"><title>Leads Demo</title>""" + CSS + """</head><body>
++<nav class="nav"><img src="{{ logo }}" style="max-height:36px;max-width:200px;width:auto;height:auto;object-fit:contain">
++<div class="nav-links"><a href="/admin" class="nav-link">← Admin</a><a href="/logout" class="nav-link">Sair</a></div></nav>
++<div style="padding:32px 0"><div class="wrap">
++  <div style="font-size:10px;letter-spacing:.14em;color:var(--dt);text-transform:uppercase;margin-bottom:6px">Experiência Demonstrativa</div>
++  <h2 style="font-size:24px;font-weight:300;color:var(--vd);margin-bottom:6px">Leads da Prévia</h2>
++  <p style="font-size:13px;color:var(--cz);margin-bottom:20px">{{ leads|length }} lead(s) · origem "Experiência Demonstrativa DNA Map"</p>
++  <div class="card" style="padding:0;overflow-x:auto">
++    <table><thead><tr>
++      <th>Data</th><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Colab.</th><th>Cargo</th><th>Estágio</th><th>Nota</th><th>Com.</th><th></th>
++    </tr></thead><tbody>
++    {% for l in leads %}<tr>
++      <td>{{ l.criado_em[:16]|replace('T',' ') }}</td>
++      <td>{{ l.nome }}</td><td>{{ l.email }}</td><td>{{ l.telefone or '—' }}</td>
++      <td>{{ l.num_colaboradores or '—' }}</td><td>{{ l.cargo or '—' }}</td>
++      <td>{{ l.resultado_demo.estagio if l.resultado_demo else '—' }}</td>
++      <td>{{ l.resultado_demo.nota_geral if l.resultado_demo and l.resultado_demo.nota_geral is not none else '—' }}</td>
++      <td>{{ 'Sim' if l.aceite_comercial else 'Não' }}</td>
++      <td><a href="/admin/leads/{{ l.id }}" class="btn btn-outline btn-sm">Ver</a></td>
++    </tr>{% else %}
++    <tr><td colspan="10" style="text-align:center;color:var(--cz);padding:24px">Nenhum lead ainda.</td></tr>
++    {% endfor %}
++    </tbody></table>
++  </div>
++</div></div></body></html>"""
++
++
++T_ADMIN_LEAD_DET = """<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
++<meta name="viewport" content="width=device-width,initial-scale=1"><title>Lead · {{ lead.nome }}</title>""" + CSS + """</head><body>
++<nav class="nav"><img src="{{ logo }}" style="max-height:36px;max-width:200px;width:auto;height:auto;object-fit:contain">
++<div class="nav-links"><a href="/admin/leads" class="nav-link">← Leads</a><a href="/logout" class="nav-link">Sair</a></div></nav>
++<div style="padding:32px 0"><div class="wrap" style="max-width:780px">
++  <h2 style="font-size:24px;font-weight:300;color:var(--vd);margin-bottom:4px">{{ lead.nome }}</h2>
++  <p style="font-size:13px;color:var(--cz);margin-bottom:20px">{{ lead.criado_em[:16]|replace('T',' ') }} · {{ lead.origem }}</p>
++  <div class="card" style="margin-bottom:16px">
++    <div class="card-header">Contato</div>
++    <p style="font-size:14px">E-mail: <b>{{ lead.email }}</b> · Telefone: <b>{{ lead.telefone or '—' }}</b></p>
++    <p style="font-size:14px">Colaboradores: <b>{{ lead.num_colaboradores or '—' }}</b> · Cargo: <b>{{ lead.cargo or '—' }}</b></p>
++    <p style="font-size:12px;color:var(--cz);margin-top:8px">LGPD tratamento: Sim · Comunicação comercial: {{ 'Sim' if lead.aceite_comercial else 'Não' }}</p>
++  </div>
++  {% if lead.resultado_demo %}
++  <div class="card" style="margin-bottom:16px">
++    <div class="card-header">Resultado da prévia</div>
++    <p style="font-size:15px">Nota geral: <b>{{ lead.resultado_demo.nota_geral }}</b> · Estágio: <b>{{ lead.resultado_demo.estagio }}</b> · Dispersão: <b>{{ lead.resultado_demo.dispersao_nivel }}</b></p>
++  </div>
++  {% endif %}
++  <div class="card">
++    <div class="card-header">Respostas</div>
++    {% for k, v in lead.respostas_demo.items() %}
++    <p style="font-size:13px;margin-bottom:6px"><b>{{ v.titulo }}:</b> nível {{ v.valor if v.valor is not none else '—' }}</p>
++    {% endfor %}
++  </div>
++</div></div></body></html>"""

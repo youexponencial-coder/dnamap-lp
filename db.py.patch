@@ -1,0 +1,11 @@
+--- /home/claude/BACKUP_ORIGINAL_20261105_163006/db.py.orig	2026-11-05 16:30:06.176770004 -0300
++++ /home/claude/dnamap-software/app/db.py	2026-11-05 16:06:42.722924898 -0300
+@@ -26,7 +26,7 @@
+ """
+ 
+ # Buckets que persistimos (dicts em DB)
+-BUCKETS_DICT = ['users', 'empresas', 'diagnosticos', 'respostas']
++BUCKETS_DICT = ['users', 'empresas', 'diagnosticos', 'respostas', 'leads']
+ # Buckets de lista
+ BUCKETS_LIST = ['vendas']
+ 
